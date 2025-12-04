@@ -88,6 +88,7 @@ const CASES: Row[] = [
   },
 ];
 
+// function component
 const useElementWidth = (ref: React.RefObject<HTMLElement | null>) => {
   const [w, setW] = useState(0);
   useLayoutEffect(() => {
@@ -98,19 +99,23 @@ const useElementWidth = (ref: React.RefObject<HTMLElement | null>) => {
     ro.observe(ref.current);
     return () => ro.disconnect();
   }, []);
+  // (setup, dependencies?)
+  // console.log(w , " <<< ")
   return w;
 };
 
 export const EmailCellQuiz: React.FC = () => {
   const [colPct, setColPct] = useState(40); // percentage width of recipients column
-  const tableWrapRef = useRef<HTMLDivElement>(null);
+  const tableWrapRef = useRef<HTMLDivElement>(null);   // (initialValue)
   const tableW = useElementWidth(tableWrapRef);
 
   const recipientsColWidthPx = useMemo(() => {
     const min = 160; // minimum width guard
     const px = Math.max(min, Math.round((colPct / 100) * (tableW || 800)));
+    // 160 *  40 / 100  bulatkan ke atas 
     return px;
   }, [colPct, tableW]);
+   // calculateValue, Depedenceies
 
   return (
     <div className="quiz-wrap">
@@ -152,7 +157,8 @@ export const EmailCellQuiz: React.FC = () => {
                   <td>{r.subject}</td>
                   <td>
                     {/* Replace with candidate’s solution component once implemented, e.g., <EmailCell .../> */}
-                    <EmailCell emails={r.recipients} />
+                    {/* disini saya kirim curent width agar component tahu width yang sedang digunakan user */}
+                    <EmailCell emails={r.recipients} currentWidth={recipientsColWidthPx} />
                   </td>
                 </tr>
               ))}
