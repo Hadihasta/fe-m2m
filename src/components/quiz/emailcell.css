@@ -1,0 +1,6 @@
+.ghost_space {
+  position: 'absolute';
+  visibility: 'hidden';
+  white-space: 'nowrap';
+pointer-events: none;
+}
