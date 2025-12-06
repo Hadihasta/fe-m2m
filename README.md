@@ -24,6 +24,7 @@ src/
          ├─ EmailCellQuiz.tsx       # interactive harness (with slider)
          └─ quiz.css                # base styling
          └─ EmailCell.css           # My solution
+         └─ EmailtCell.test.tsx     # unit testing for component emailcell component
 ```
 
 ---
@@ -63,3 +64,6 @@ src/
 ===================================================================================================================================
 
 
+React testing library & vitest
+testing command  :
+npx vitest
